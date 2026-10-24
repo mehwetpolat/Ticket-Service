@@ -69,7 +69,7 @@ public sealed class SetupStatusService(
         var destinationTested = targetTest?.DestinationChecked == true || legacyTest?.ProjectChecked == true;
         var projectConfigured = project.DestinationId.Length > 0;
         var mailboxes = mailConfig?.Mailboxes ?? new List<AdminMailbox>();
-        var mailConfigured = mailboxes.Count > 0 && mailboxes.All(box => box.HasPassword);
+        var mailConfigured = mailboxes.Count > 0 && mailboxes.All(box => box.HasCredentials);
         var mailConnected = pollStatus?.State == MailCheckState.Connected && pollStatus.CheckedAt > 0;
         var sendersConfigured = senderList.Any(sender => sender.Active) || domainList.Count > 0;
         var dryRunSeen = stats.GetValueOrDefault("dry_run") > 0 || stats.GetValueOrDefault("published") > 0;

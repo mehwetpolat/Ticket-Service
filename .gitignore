@@ -28,6 +28,9 @@ frontend/src/styles/app.css
 .env.*
 !.env.example
 
+## Local notes
+/docs/project-guide.md
+
 ## OS files
 .DS_Store
 Thumbs.db

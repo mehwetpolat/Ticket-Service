@@ -57,7 +57,14 @@ public static class DependencyInjection
         services.AddScoped<TicketPublisher>();
         services.AddScoped<ITicketPublisher>(provider => provider.GetRequiredService<TicketPublisher>());
         services.AddScoped<ITicketProviderProbe, TicketProviderProbe>();
-        services.AddHostedService<ImapMailPoller>();
+        services.AddHttpClient();
+        services.AddSingleton<ImapMailProvider>();
+        services.AddSingleton<GraphMailProvider>();
+        services.AddSingleton<GmailMailProvider>();
+        services.AddSingleton<IMailProvider>(provider => provider.GetRequiredService<ImapMailProvider>());
+        services.AddSingleton<IMailProvider>(provider => provider.GetRequiredService<GraphMailProvider>());
+        services.AddSingleton<IMailProvider>(provider => provider.GetRequiredService<GmailMailProvider>());
+        services.AddHostedService<MailPoller>();
         return services;
     }
 }

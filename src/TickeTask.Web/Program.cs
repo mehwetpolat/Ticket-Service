@@ -82,7 +82,18 @@ app.Use(async (context, next) =>
 });
 
 app.UseDefaultFiles();
-app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    OnPrepareResponse = context =>
+    {
+        var requestPath = context.Context.Request.Path;
+        if (requestPath.StartsWithSegments("/assets") ||
+            requestPath.Value?.EndsWith(".html", StringComparison.OrdinalIgnoreCase) == true)
+        {
+            context.Context.Response.Headers.CacheControl = "no-cache, must-revalidate";
+        }
+    }
+});
 app.MapTickeTaskApi();
 app.MapFallback("/api/{**rest}", () => ApiSupport.Error(404, "Bulunamadı."));
 app.MapFallbackToFile("index.html");

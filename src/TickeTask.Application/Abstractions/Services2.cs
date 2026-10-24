@@ -31,6 +31,12 @@ public interface IMailConfigService
     Task SetPollStatusAsync(MailPollStatus status, CancellationToken ct = default);
 }
 
+public interface IMailProvider
+{
+    MailProviderKind Provider { get; }
+    Task<MailboxPollStatus> PollAsync(MailboxOptions account, MailOptions options, IMailIngestionService ingestion, CancellationToken ct = default);
+}
+
 public interface IMailSenderService
 {
     Task<List<MailSenderInfo>> ListAsync(CancellationToken ct = default);

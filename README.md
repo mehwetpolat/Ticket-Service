@@ -8,17 +8,17 @@ Mesajlar, izin listeleri, entegrasyon anahtarları ve ticket geçmişi yerel SQL
 
 ## Öne çıkanlar
 
-- **Arka planda otomatik ticket:** IMAP poller uygulama içinde çalışır; arayüz kapalıyken de gelen kutusunu kontrol eder ve uygun e-postaları seçili ticket sisteminde kayda dönüştürür.
+- **Arka planda otomatik ticket:** Mail poller uygulama içinde çalışır; arayüz kapalıyken de gelen kutusunu kontrol eder ve uygun e-postaları seçili ticket sisteminde kayda dönüştürür.
 - **Yerel ticket yönetimi:** Her ticket; durum, atanan kişi, düzenlenebilir alanlar ve ekip notlarıyla TickeTask içinde yönetilir. Harici sisteme gönderim ayrı ve isteğe bağlı bir adımdır.
 - **Yalnızca LLM analizi:** Mesajın ticket'a dönüşüp dönüşmeyeceğine ve taslağın içeriğine yerel model karar verir; kural tabanlı bir yedek analiz kullanılmaz. Model erişilemezse işlem hata olarak görünür ve yeniden denenir.
 - **Envanter bağlamı:** Gönderen e-posta adresi envanterdeki kişi ve cihazlarla eşleştirilir; doğrulanan kişi/cihaz bilgisi ticket açıklamasına ve harici sistem kaydına eklenir.
 - **Kaynak korunur:** LLM'in düzelttiği açıklamanın altına özgün kaynak mesaj ayrı bir bölüm olarak eklenir.
 - **Beş ticket hedefi:** Jira Cloud, Trello, GitHub Issues, Asana ve ClickUp. Hedef kurum genelinde, harici taraflarda veya tek tek ticket'larda seçilebilir.
-- **Çoklu mail kutusu:** Aynı kurulumda en fazla 10 IMAP hesabı tanımlanabilir.
+- **Çoklu mail kutusu ve modern kimlik doğrulama:** Aynı kurulumda en fazla 10 hesap tanımlanabilir. IMAP kullanıcı adı + parolasının yanı sıra Microsoft 365 Graph ve Google Workspace Gmail API desteklenir.
 - **Otomatik e-posta değerlendirmesi:** Otomatik yanıt, bülten ve toplu e-posta işaretleri modele bağlam olarak verilir; ticket açılıp açılmayacağına model karar verir.
 - **İlk tarama koruması:** İlk çalıştırmada eski e-postalar varsayılan olarak işlenmez; istenirse mevcut iletiler de sırayla alınır.
 - **Deneme → canlı geçişi:** Önce hedef sisteme yazmadan analiz sonucu görülür, doğrulandıktan sonra canlı moda geçilir.
-- **Kurulum sihirbazı:** Token, hedef, model, IMAP hesabı ve izin listesi için adım adım yönlendirme.
+- **Kurulum sihirbazı:** Token, hedef, model, mail hesabı ve izin listesi için adım adım yönlendirme.
 - **Yerel model yönetimi:** Ollama modeli uygulamanın içinden indirilir, iki disk konumu arasında taşınabilir ve indirme ilerlemesi arayüzden izlenir.
 - **Tek komutla Docker:** `docker compose up -d --build` hem TickeTask'ı hem Ollama'yı başlatır; servis sağlık kontrolleri hazır olmadan trafik almaz.
 - **Güvenli varsayılanlar:** Docker portu yalnızca `127.0.0.1`'e bağlanır, oturum çerezleri `HttpOnly` + `SameSite=Strict`, gizli değerler AES-GCM ile şifrelenir, hassas uç noktalarda hız sınırı vardır.
@@ -29,7 +29,7 @@ Mesajlar, izin listeleri, entegrasyon anahtarları ve ticket geçmişi yerel SQL
 | --- | --- | --- |
 | `TickeTask.Domain` | .NET 8 | Entity, enum ve iş kuralları |
 | `TickeTask.Application` | .NET 8 | DTO, servis sözleşmeleri, repository arayüzleri, ticket analizi |
-| `TickeTask.Infrastructure` | EF Core, SQLite, MailKit, HtmlAgilityPack | Kalıcılık, IMAP poller, şifreleme, entegrasyonlar, yerel model istemcisi |
+| `TickeTask.Infrastructure` | EF Core, SQLite, MailKit, HtmlAgilityPack | Kalıcılık, IMAP/Graph/Gmail mail sağlayıcıları, şifreleme, entegrasyonlar, yerel model istemcisi |
 | `TickeTask.Web` | ASP.NET Core Minimal API | `/api/*` sözleşmeleri, kimlik doğrulama, statik React SPA |
 | `TickeTask.Tests` | xUnit | Birim, repository ve API entegrasyon testleri |
 | `frontend` | React 19, TypeScript, esbuild | Tek sayfa yönetim arayüzü |
@@ -41,7 +41,7 @@ API uç noktaları konuya göre `src/TickeTask.Web/Api/ApiEndpoints.*.cs` partia
 - Docker Desktop (Windows/macOS) veya Docker Engine + Compose (Linux)
 - En az 8 GB RAM (yerel model için 8–16 GB önerilir)
 - Jira Cloud, Trello, GitHub, Asana veya ClickUp hesabı ve hedef proje/liste/depoda izin
-- IMAP erişimi açık bir IT e-posta kutusu
+- IMAP, Microsoft 365 Graph veya Google Workspace üzerinden erişilebilen bir IT e-posta kutusu
 
 ## Docker ile kurulum
 
@@ -53,7 +53,7 @@ docker compose up -d --build
 
 Model ilk kez **Ayarlar → Yerel yapay zekâ** bölümünden indirilir. Ollama konteyneri model olmadan da açılır; model hazır değilken manuel analiz açık bir hata döndürür, e-posta kayıtları ise yeniden deneme kuyruğunda bekletilir.
 
-Windows'ta depo kökündeki `start-ticketask.cmd` dosyası da kullanılabilir. Script imajı kurar, sağlık kontrolünü bekler ve tarayıcıyı açar.
+Windows'ta depo kökündeki `start-ticketask.cmd` dosyası da kullanılabilir. Script her çalıştırmada Docker imajını güncel kaynaklardan yeniden oluşturur, eksik imajları çeker, sağlık kontrolünü bekler ve tarayıcıyı açar.
 
 `.env` dosyası zorunlu değildir; varsayılanlar güvenli yerel çalışma için hazırdır. Kurumsal ağa açmak veya HTTPS ters vekil kullanmak için [Güvenlik ve ağ erişimi](#güvenlik-ve-ağ-erişimi) bölümüne bakın.
 
@@ -107,29 +107,63 @@ E-posta ile gelen ticket'larda gönderen adresi önce envanter kişileriyle, son
 
 ## E-posta ile otomatik ticket
 
-### IT kutusunu bağlama
+### Desteklenen sağlayıcılar
 
-**Ayarlar → Mail sistemi** bölümünde:
-
-- **Görünen ad:** Örn. `IT Destek`
-- **IMAP sunucusu:** Kurum mail sunucunuzun adresi
-- **Hesap / kullanıcı adı:** Örn. `it@sirket.com`
-- **IMAP parolası:** Hesap parolası veya sağlayıcının verdiği uygulama parolası
-- **Gelen kutusu:** Genellikle `INBOX`
-- **Bağlantı türü / port:** TLS 993 (önerilen) veya STARTTLS 143
-
-Birden fazla kutu için **Mail hesabı ekle** düğmesini kullanın. En fazla 10 hesap tanımlanabilir. Parolalar ekranda gösterilmez; boş bırakılırsa kayıtlı parola korunur.
-
-### Sağlayıcı notları
-
-| Sağlayıcı | IMAP | Not |
+| Sağlayıcı | Kimlik doğrulama | Ne zaman kullanılır |
 | --- | --- | --- |
-| Microsoft 365 / Outlook | `outlook.office365.com`, 993, TLS | Kurumda genellikle OAuth2 veya modern kimlik doğrulama zorunludur. Uygulama IMAP kullanıcı adı + parola/uygulama parolası destekler. Kurum mail yöneticinizden IMAP AUTH politikasını doğrulayın. |
+| **IMAP** | Kullanıcı adı + parola veya uygulama parolası | Şirket içi Exchange, kendi mail sunucusu ve temel kimlik doğrulaması açık hesaplar |
+| **Microsoft 365 (Graph)** | OAuth2 client credentials + `Mail.Read` uygulama izni | Microsoft 365 / Outlook kurumsal kutuları; temel kimlik doğrulama kapalı olsa da çalışır |
+| **Google Workspace (Gmail)** | OAuth2 refresh token veya domain-wide delegation | Google Workspace kurumsal kutuları |
+
+Her hesap kendi sağlayıcısını kullanır; aynı kurulumda farklı sağlayıcılardan en fazla 10 hesap tanımlanabilir. Sağlayıcı seçimi **Ayarlar → Mail sistemi** bölümündeki hesap kartında yapılır. Parolalar, OAuth istemci sırları, refresh token'lar ve hizmet hesabı JSON'ları AES-GCM ile şifrelenir; kaydedildikten sonra arayüzde gösterilmez.
+
+### IMAP kurulumu
+
+1. Mail sunucunuzdan IMAP adresi, port ve hesap bilgilerini alın. Genellikle `993` + TLS kullanılır.
+2. Hesapta iki adımlı doğrulama varsa sağlayıcının verdiği uygulama parolasını oluşturun.
+3. Hesap kartında sağlayıcıyı **IMAP** seçin; görünen ad, sunucu, kullanıcı, parola, gelen kutusu (`INBOX`) ve bağlantı türünü girin. SSL/TLS genellikle `993`, STARTTLS ise `143` portunu kullanır.
+4. **Mail ayarlarını kaydet** düğmesine basın; **Bağlantı durumu** kartında hesabın **Bağlı** olmasını bekleyin.
+
+> STARTTLS seçeneği sunucunun STARTTLS desteklemesini zorunlu kılar; desteklenmiyorsa bağlantı hata verir. Şifrelenmemiş bağlantıya geri düşülmez. Self-signed sertifikalar reddedilir.
+
+| IMAP sağlayıcısı | Sunucu | Not |
+| --- | --- | --- |
+| Microsoft 365 / Outlook | `outlook.office365.com`, 993, TLS | Kurumda genellikle OAuth2 zorunludur. Temel kimlik doğrulama kapalıysa Graph sağlayıcısını kullanın. |
 | Google Workspace | `imap.gmail.com`, 993, TLS | İki adımlı doğrulama açıksa uygulama parolası gerekir. Kurum politikası IMAP'i kapatmış olabilir. |
 | Kurum içi Exchange | `mail.sirket.com` | IMAP servisinin açık olduğunu ve hesabın IMAP erişim yetkisi olduğunu doğrulayın. |
 | Diğer | Sağlayıcı belgesi | TLS sertifikası geçerli olmalıdır; self-signed sertifikalar reddedilir. |
 
-> **Önemli sınırlama:** OAuth2 / Microsoft Graph / Gmail API desteği yoktur. Microsoft 365 kiracınız temel kimlik doğrulamayı kapattıysa doğrudan bağlanılamaz. Bu durumda kurum içi bir IMAP köprüsü veya uygulama parolası politikası gerekir.
+> Microsoft 365 veya Google Workspace temel kimlik doğrulamayı kapattıysa aşağıdaki modern sağlayıcılardan birini kullanın.
+
+### Microsoft 365 / Graph kurulumu
+
+1. [Azure portal](https://portal.azure.com) → **Microsoft Entra ID** → **Uygulama kayıtları** → **Yeni kayıt** ile tek kiracılı bir uygulama oluşturun.
+2. **API izinleri** → **İzin ekle** → **Microsoft Graph** → **Uygulama izinleri** → `Mail.Read` seçin ve **Yönetici onayı ver** düğmesine basın.
+3. **Sertifikalar ve sırlar** → **Yeni istemci sırrı** oluşturun. Değer yalnızca bir kez gösterilir; hemen kopyalayın.
+4. **Genel bakış** sayfasından **Dizin (kiracı) ID** ve **Uygulama (istemci) ID** değerlerini kopyalayın. Kiracı alanına `common` yerine dizin ID'sini veya kurum alan adını yazın.
+5. TickeTask'ta hesap kartında sağlayıcıyı **Microsoft 365 · Graph** seçin; posta kutusu adresini (`it@sirket.com`), kiracı ID, istemci ID, istemci sırrı ve klasörü girin. Gelen kutusu için `inbox`; gönderilenler için `sentitems` gibi Microsoft Graph iyi bilinen klasör adlarını kullanın. Özel klasörlerde görünen ad değil **klasör ID'si** gerekir.
+6. Kaydedin; **Bağlantı durumu** kartında **Bağlı** görmelisiniz.
+
+> İstemci sırlarının bir son kullanma tarihi vardır (genellikle 6-24 ay). Süresi dolduğunda bağlantı kesilir; Azure portalından yeni sır oluşturup TickeTask'a girin. Uygulama izni kiracıdaki tüm posta kutularına erişebilir. Yalnızca IT kutusuna izin vermek için Exchange Online'da [application access policy](https://learn.microsoft.com/exchange/security-and-compliance/application-access-policy) tanımlayın.
+
+### Google Workspace / Gmail kurulumu
+
+**Seçenek A — Hizmet hesabı (kurumsal kurulumlar için önerilir)**
+
+1. [Google Cloud Console](https://console.cloud.google.com) üzerinde proje oluşturun ve **Gmail API**'yi etkinleştirin.
+2. **IAM ve Yönetici** → **Hizmet hesapları** → yeni hizmet hesabı oluşturun. Hizmet hesabının **Gelişmiş ayarlar** bölümünde **Google Workspace alan genelinde yetkilendirme** seçeneğini etkinleştirin. Ardından **Anahtarlar** → **Anahtar ekle** → **JSON** ile anahtarı indirin.
+3. Google Yönetici konsolu → **Güvenlik** → **API erişimi** → **Alan genelinde yetkilendirme** → yeni istemci ekleyin. Hizmet hesabının istemci ID'sini ve `https://www.googleapis.com/auth/gmail.readonly` kapsamını girin. Yetkilendirmeyi kaydettikten sonra 5-10 dakika bekleyin.
+4. TickeTask'ta sağlayıcıyı **Google Workspace · Gmail** seçin; taklit edilecek posta kutusunu (`it@sirket.com`), indirdiğiniz JSON dosyasının tamamını ve etiketi girin. Etiket alanına sistem etiketi (`INBOX`) veya özel etiketin görünen adını/kimliğini (`Label_...`) yazabilirsiniz; görünen adlar otomatik olarak kimliğe çevrilir.
+5. Kaydedin; **Bağlantı durumu** kartında **Bağlı** görmelisiniz.
+
+**Seçenek B — OAuth2 yenileme belirteci**
+
+1. Google Cloud Console'da **OAuth izin ekranı**nı oluşturun. Kurum içi kullanım için **Internal** kullanıcı türünü seçin; **Testing** modunda bırakırsanız yenileme belirteci **7 gün** sonra geçersiz olur.
+2. **Kimlik bilgileri** → **OAuth istemcisi** → **Web uygulaması** oluşturun. Yetkili yönlendirme adresi olarak `https://developers.google.com/oauthplayground` ekleyin.
+3. [OAuth 2.0 Playground](https://developers.google.com/oauthplayground) → sağ üstteki dişli → **Use your own OAuth credentials** → istemci ID ve sırrını girin. 1. adımda **Gmail API v1** → `https://www.googleapis.com/auth/gmail.readonly` seçip yetkilendirin. 2. adımda kodu belirteçle değiştirin ve **Refresh token** değerini kopyalayın.
+4. TickeTask'ta istemci ID, istemci sırrı ve refresh token alanlarını doldurun; etiket olarak `INBOX` girin.
+
+> Gmail API'de `gmail.readonly` yeterlidir; uygulama e-postayı okur, silmez ve okundu işaretlemez. `INBOX` etiketi yalnızca gelen kutusundaki postaları alır; arşivlenmiş postalar işlenmez. Hizmet hesabı kullanıyorsanız hem Cloud Console'da alan genelinde yetkilendirmeyi etkinleştirmek hem de Workspace yöneticisinin istemci ID'sini yetkilendirmesi gerekir. Tüketici `@gmail.com` hesapları hizmet hesabıyla taklit edilemez; bunlar için OAuth2 seçeneğini kullanın. Uygulamanın OAuth izin ekranı **Testing** modundaysa 7 günde bir yeni refresh token almanız gerekir.
 
 ### İzinli gönderenler
 
@@ -153,7 +187,7 @@ Boş gövde, yalnızca selamlama/imza, otomatik yanıt (`Auto-Submitted`, `Prece
 
 ### Arka plan çalışması ve tekrar deneme
 
-IMAP poller ASP.NET Core hosted service olarak uygulama içinde çalışır ve 15 saniyede bir uyanır. Arayüzün açık olması gerekmez. Başarısız kayıtlar üstel geri çekilmeyle otomatik yeniden denenir; kalıcı olarak reddedilen tek bir mesaj kuyruğu kilitlemez.
+Mail poller ASP.NET Core hosted service olarak uygulama içinde çalışır ve 5 saniyede bir uyanır; her hesabı seçtiğiniz kontrol aralığında (en az 15 saniye) denetler, ayar değişikliğinde hemen tetiklenir. Her hesap için sağlayıcıya uygun IMAP, Microsoft Graph veya Gmail istemcisi kullanılır. Arayüzün açık olması gerekmez. Başarısız kayıtlar üstel geri çekilmeyle otomatik yeniden denenir; kalıcı olarak reddedilen tek bir mesaj kuyruğu kilitlemez.
 
 Durumu izlemek için:
 
@@ -247,7 +281,7 @@ Panelden kaydedilen entegrasyon değerleri aynı ada sahip ortam değişkenlerin
 | `MODEL_CONFIG_DIR` | `data/model-config` | Model bağlantı ve seçim durumu |
 | `MODEL_PRIMARY_DIR` / `MODEL_SECONDARY_DIR` | `data/model-primary` / `data/model-secondary` | Yerel geliştirmede model kökleri |
 | `MODEL_REGISTRY_URL` | `https://registry.ollama.ai/v2/library/qwen3` | Doğrudan model indirme kaydı |
-| `MAIL_STATE_DIR` | `data/mail` | IMAP poller durum dosyaları |
+| `MAIL_STATE_DIR` | `data/mail` | Mail poller durum dosyaları (IMAP UID/Graph imleci/Gmail imleci) |
 | `APP_PUBLIC_ORIGIN` | boş | Tarayıcıda görünen HTTPS adresi |
 | `TRUST_PROXY` | `0` | Güvenilir ters vekil arkasında `1` |
 | `ALLOW_SELF_REGISTRATION` | `1` | `0` ise kendi kendine kayıt kapalı |
@@ -318,7 +352,7 @@ dotnet ef migrations add <Ad> \
 - **Uygulama açılmıyor:** `docker compose ps` ve `docker compose logs app` çıktısını kontrol edin. İlk kurulumda imajın bitmesini bekleyin.
 - **Windows script'i hemen kapanıyor:** Docker Desktop'ın açık ve motorun hazır olduğundan emin olun. Script hata mesajını kapatmadan önce gösterir.
 - **8787 portu dolu:** TickeTask zaten çalışıyor olabilir; `docker compose ps` ile kontrol edin. Docker dışı çalıştırmada `--urls` ile başka port seçin.
-- **Mail bağlantısı hata veriyor:** Sunucu/port/TLS seçimini, hesabın IMAP iznini ve sağlayıcı uygulama parolası politikasını doğrulayın. `docker compose logs -f app` ayrıntı verir.
+- **Mail bağlantısı hata veriyor:** Önce seçili sağlayıcıyı doğrulayın. IMAP'te sunucu/port/TLS ve hesap izni; Microsoft Graph'ta kiracı/istemci bilgileri, istemci sırrının süresi ve `Mail.Read` yönetici onayı; Gmail'de `gmail.readonly` kapsamı, refresh token veya hizmet hesabı delegation ayarı kontrol edilmelidir. Gmail OAuth izin ekranı Testing modundaysa refresh token 7 gün sonra geçersiz olur; Graph'ta özel klasörlerde görünen ad değil klasör ID'si gerekir. Hesap kartındaki hata mesajı ve `docker compose logs -f app` ayrıntı verir.
 - **Model sunucusuna ulaşılamıyor:** `docker compose ps` ile Ollama'nın çalıştığını, `OLLAMA_URL` değerini ve modelin indirildiğini kontrol edin.
 - **Jira 401:** Yönetici API key'i yerine kullanıcı API token'ı ve o kullanıcının e-postasını girin.
 - **Veritabanı kilitli:** Aynı veritabanına bağlanan ikinci bir uygulama örneği olup olmadığını kontrol edin; SQLite tek yazıcı destekler.

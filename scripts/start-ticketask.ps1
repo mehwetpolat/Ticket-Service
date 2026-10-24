@@ -18,15 +18,10 @@ try {
         throw 'Docker Compose bulunamadi. Docker Desktop kurulumunu onarip yeniden deneyin.'
     }
 
-    $running = docker compose ps --services --status running 2>$null
-    if ($LASTEXITCODE -eq 0 -and $running -contains 'app') {
-        Write-Host 'TickeTask zaten calisiyor; saglik kontrolu yapiliyor...'
-    } else {
-        Write-Host 'TickeTask ilk kez kuruluyor. Imaj olusturuluyor, bu birkac dakika surebilir...'
-        docker compose up -d --build
-        if ($LASTEXITCODE -ne 0) {
-            throw 'Kurulum tamamlanamadi. Yukaridaki Docker hatasini kontrol edin.'
-        }
+    Write-Host 'TickeTask baslatiliyor; imaj guncelleniyor (onbellek sayesinde genellikle kisa surer)...'
+    docker compose up -d --build --remove-orphans --pull missing
+    if ($LASTEXITCODE -ne 0) {
+        throw 'Baslatma tamamlanamadi. Yukaridaki Docker hatasini kontrol edin.'
     }
 
     Write-Host 'Uygulamanin hazir olmasi bekleniyor...'

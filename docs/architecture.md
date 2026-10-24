@@ -1,6 +1,6 @@
 # Mimari
 
-TickeTask, ASP.NET Core Minimal API üzerinde çalışan tek süreçli bir uygulamadır. React arayüzü aynı süreçten statik dosya olarak sunulur; IMAP poller ve model indirme işleri de süreç içinde arka plan görevleri olarak yürür.
+TickeTask, ASP.NET Core Minimal API üzerinde çalışan tek süreçli bir uygulamadır. React arayüzü aynı süreçten statik dosya olarak sunulur; mail poller ve model indirme işleri de süreç içinde arka plan görevleri olarak yürür.
 
 ## Katmanlar
 
@@ -14,7 +14,7 @@ TickeTask.Infrastructure
   ├─ Persistence/                 EF Core, repository, unit of work, migration
   ├─ Services/                    ayarlar, mail, ticket, model, setup
   ├─ Integrations/                Jira, Trello, GitHub, Asana, ClickUp
-  ├─ Mail/                        IMAP poller
+  ├─ Mail/                        IMAP, Microsoft Graph ve Gmail sağlayıcıları + poller
   └─ Security/                    PBKDF2, AES-GCM, token, hız sınırı
 TickeTask.Application
   ├─ Abstractions/                servis ve repository sözleşmeleri
@@ -62,7 +62,7 @@ Tarayıcıdan gelen mutasyon isteklerinde `Origin` ve `Sec-Fetch-Site` doğrulan
 - İlk yönetici, `.ticketask-runtime/admin-password` dosyasındaki kurulum şifresiyle oluşturulur.
 - Şifreler PBKDF2-SHA256 (210.000 tur, rastgele tuz) ile saklanır.
 - Oturum token'ı istemciye `HttpOnly`, `SameSite=Strict` çerezle verilir; veritabanında SHA-256 özeti tutulur.
-- Entegrasyon anahtarları ve mail parolaları AES-GCM ile şifrelenir. Anahtar `master-key` dosyasından veya `APP_MASTER_KEY` değişkeninden gelir.
+- Entegrasyon anahtarları, mail parolaları ve OAuth/hizmet hesabı sırları AES-GCM ile şifrelenir. Anahtar `master-key` dosyasından veya `APP_MASTER_KEY` değişkeninden gelir.
 - Hız sınırlayıcı süreç içidir. Çok örnekli dağıtımda merkezi bir çözüm gerekir.
 - Model adresi yalnızca özel ağ/loopback host'larına izin verir; yönlendirmeler kapalıdır.
 

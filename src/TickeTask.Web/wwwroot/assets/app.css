@@ -225,12 +225,30 @@ body{font-family:"Segoe UI",Arial,sans-serif}
 .setup-steps{display:flex;flex-wrap:wrap;gap:8px}
 .setup-steps span{padding:7px 10px;border-radius:7px;background:#edf1ff;color:#4054bd;font-size:.8rem;font-weight:700}
 .form-row.two{grid-template-columns:1fr 1fr}
+.form-row.two>.setting-help{grid-column:1/-1}
 .setting-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
 .connection{display:inline-flex;align-items:center;gap:5px;font-size:.83rem;font-weight:700}
 .connection.good{color:var(--success)}
 .connection.warn{color:#ad6d24}
 .connection.bad{color:#b63343}
 .mail-mode-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.mail-guide{display:grid;gap:12px;padding:14px 16px;border:1px solid #dfe6f5;border-radius:12px;background:#f8faff}
+.mail-guide-head{display:flex;align-items:flex-start;gap:10px}
+.mail-guide-head>svg{flex:none;margin-top:2px;color:var(--brand)}
+.mail-guide-head strong{display:block;font-size:.9rem}
+.mail-guide-head small{display:block;margin-top:3px;color:var(--muted);font-size:.78rem;line-height:1.45}
+.mail-guide-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.mail-guide-tabs button{padding:6px 11px;border:1px solid #d8e0f2;border-radius:7px;background:#fff;color:var(--muted);font-size:.8rem;font-weight:700}
+.mail-guide-tabs button:hover{border-color:#b9c6e4;color:var(--ink)}
+.mail-guide-tabs button.active{border-color:var(--brand);background:var(--brand);color:#fff}
+.mail-guide-scope{color:var(--muted);font-size:.76rem;line-height:1.45}
+.mail-guide-body{display:grid;gap:8px}
+.mail-guide-body ol{display:grid;gap:6px;margin:0;padding-left:20px;color:var(--ink);font-size:.82rem;line-height:1.5}
+.mail-guide-body h4{margin:6px 0 0;font-size:.82rem;color:var(--ink)}
+.mail-guide-body code{padding:1px 4px;border-radius:4px;background:#e9eefb;font-size:.78rem;overflow-wrap:anywhere}
+.mail-guide-body a{display:inline-flex;align-items:center;gap:3px;color:var(--brand);font-weight:700}
+.mail-guide-note{margin:0;padding:8px 10px;border-left:3px solid #d9a441;border-radius:0 6px 6px 0;background:#fffaf0;color:#7a5a1e;font-size:.78rem;line-height:1.45}
+.mail-guide-note a{display:inline-flex;align-items:center;gap:3px;color:#8a5a0a;font-weight:700}
 .mail-account-list{display:grid;gap:13px}
 .mail-account-card{display:grid;gap:14px;padding:16px;border:1px solid var(--line);border-radius:10px;background:#fff}
 .mail-account-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
@@ -321,7 +339,7 @@ body{font-family:"Segoe UI",Arial,sans-serif}
 .login-card .primary{width:100%}
 .github{background:#24292f}.asana{background:#ec5b5b}.clickup{background:#7b49cf}
 @media(max-width:900px){.mail-mode-grid{grid-template-columns:1fr 1fr}.mail-history-row{grid-template-columns:1fr}.mail-history-meta{justify-items:start;grid-auto-flow:column;flex-wrap:wrap}.setup-hero{grid-template-columns:auto minmax(0,1fr)}.setup-refresh{grid-column:2;justify-self:start}.mail-advanced-grid{grid-template-columns:1fr}.mail-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:600px){.settings-page{padding:0 14px;margin:14px auto}.form-row.two{grid-template-columns:1fr}.setup-panel{gap:15px}.setting-actions>*{width:100%}.connection{text-align:center}.mail-mode-grid{grid-template-columns:1fr}.mail-account-head{flex-direction:column}.mail-account-actions{width:100%;justify-content:space-between}.setup-hero{grid-template-columns:1fr}.setup-hero-icon{width:44px;height:44px}.setup-refresh{grid-column:1}.setup-step{grid-template-columns:30px minmax(0,1fr)}.setup-step-action,.setup-step-done{grid-column:2;justify-self:start}.mail-history-meta{grid-auto-flow:row}}
+@media(max-width:600px){.settings-page{padding:0 14px;margin:14px auto}.form-row.two{grid-template-columns:1fr}.setup-panel{gap:15px}.setting-actions>*{width:100%}.connection{text-align:center}.mail-mode-grid{grid-template-columns:1fr}.mail-account-head{flex-direction:column}.mail-account-actions{width:100%;justify-content:space-between}.setup-hero{grid-template-columns:1fr}.setup-hero-icon{width:44px;height:44px}.setup-refresh{grid-column:1}.setup-step{grid-template-columns:30px minmax(0,1fr)}.setup-step-action,.setup-step-done{grid-column:2;justify-self:start}.mail-history-meta{grid-auto-flow:row}.mail-guide{padding:12px}}
 
 /* Frosted service-desk theme. Kept as a final override layer so every screen shares one visual system. */
 :root {
