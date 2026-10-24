@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="840" viewBox="0 0 1200 840" role="img" aria-labelledby="title desc">
+  <title id="title">Örnek senaryo 3: Talep ticket sisteminde kayıt olur</title>
+  <desc id="desc">TickeTask'ın oluşturduğu VPN sertifika hatası, cihaz bilgisi ve iş etkisi Jira Cloud üzerinde IT-142 numaralı ticket olarak görünür.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7f9fd"/>
+      <stop offset="1" stop-color="#edf2fa"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6f8cff"/>
+      <stop offset="1" stop-color="#445be7"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#172131" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      .font { font-family: 'Segoe UI', Arial, Helvetica, sans-serif; }
+      .eyebrow { font-size: 14px; font-weight: 700; letter-spacing: 2px; fill: #69758a; }
+      .title { font-size: 34px; font-weight: 700; letter-spacing: -1px; fill: #172131; }
+      .subtitle { font-size: 18px; fill: #69758a; }
+      .window-title { font-size: 15px; font-weight: 700; fill: #33425a; }
+      .issue-title { font-size: 28px; font-weight: 700; letter-spacing: -0.7px; fill: #172131; }
+      .section { font-size: 11px; font-weight: 800; letter-spacing: 1.3px; fill: #8a96a9; }
+      .body { font-size: 15px; fill: #33425a; }
+      .meta { font-size: 13px; fill: #7b879b; }
+      .label { font-size: 10px; font-weight: 800; letter-spacing: 0.8px; fill: #8a96a9; }
+      .value { font-size: 14px; font-weight: 600; fill: #33425a; }
+      .small { font-size: 12px; fill: #8a96a9; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="840" fill="url(#bg)"/>
+  <circle cx="1140" cy="80" r="210" fill="#445be7" opacity="0.055"/>
+  <path d="M0 720 C260 680 420 780 680 730 S1000 670 1200 730" fill="none" stroke="#445be7" stroke-opacity="0.05" stroke-width="2"/>
+
+  <g class="font">
+    <rect x="56" y="38" width="40" height="40" rx="11" fill="url(#accent)"/>
+    <path d="M69 59 L76 49 L83 59" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M69 59 L76 69 L83 59" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+    <text x="108" y="64" font-size="22" font-weight="700" fill="#172131">TickeTask</text>
+    <text x="109" y="80" font-size="10" font-weight="700" letter-spacing="1.6" fill="#8a96a9">IT SERVİS MASASI</text>
+
+    <rect x="944" y="40" width="200" height="34" rx="17" fill="#ffffff" stroke="#dbe3ef"/>
+    <text x="966" y="62" class="eyebrow">ÖRNEK AKIŞ · 03 / 03</text>
+
+    <text x="56" y="140" class="title">Ticket sisteminde kayıt açılır</text>
+    <text x="56" y="170" class="subtitle">Başlık, öncelik, cihaz ve iş etkisi seçili hedefte ekip tarafından görülebilen bir ticket olur.</text>
+
+    <g filter="url(#shadow)">
+      <rect x="56" y="200" width="1088" height="560" rx="18" fill="#ffffff"/>
+    </g>
+
+    <rect x="56" y="200" width="1088" height="52" rx="18" fill="#f8fafc"/>
+    <rect x="56" y="234" width="1088" height="18" fill="#f8fafc"/>
+    <line x1="56" y1="252" x2="1144" y2="252" stroke="#e3e8ef"/>
+    <circle cx="82" cy="226" r="5" fill="#e8a3a8"/>
+    <circle cx="100" cy="226" r="5" fill="#eccb8b"/>
+    <circle cx="118" cy="226" r="5" fill="#a8d8c0"/>
+    <rect x="146" y="215" width="22" height="22" rx="6" fill="#445be7"/>
+    <text x="157" y="231" text-anchor="middle" font-size="12" font-weight="800" fill="#ffffff">J</text>
+    <text x="178" y="231" class="window-title">Jira Cloud · IT Destek</text>
+    <text x="1090" y="231" text-anchor="end" font-size="13" font-weight="700" fill="#445be7">IT-142</text>
+
+    <rect x="88" y="268" width="74" height="22" rx="11" fill="#fff1e6"/>
+    <text x="125" y="283" text-anchor="middle" font-size="10" font-weight="800" fill="#b45309">INCIDENT</text>
+    <text x="178" y="286" font-size="14" font-weight="700" fill="#445be7">IT-142</text>
+    <rect x="1020" y="266" width="100" height="26" rx="13" fill="#eef2ff"/>
+    <text x="1070" y="283" text-anchor="middle" font-size="11" font-weight="800" fill="#3449cc">AÇIK</text>
+    <text x="88" y="328" class="issue-title">VPN bağlantısı açılmıyor</text>
+
+    <text x="88" y="360" class="meta">Öncelik: </text>
+    <rect x="144" y="344" width="62" height="22" rx="11" fill="#fff1e6"/>
+    <text x="175" y="359" text-anchor="middle" font-size="10" font-weight="800" fill="#b45309">YÜKSEK</text>
+    <text x="224" y="360" class="meta">Talep eden: Ayşe Yılmaz · Cihaz: FIN-LT-042</text>
+    <line x1="88" y1="382" x2="1100" y2="382" stroke="#e8edf5"/>
+
+    <text x="88" y="414" class="section">AÇIKLAMA</text>
+    <text x="88" y="444" class="body">Ayşe Yılmaz (Finans), dün akşamdan beri şirket VPN'ine</text>
+    <text x="88" y="468" class="body">bağlanamıyor. Bağlantı kuruluyor gibi oluyor ancak birkaç</text>
+    <text x="88" y="492" class="body">saniye sonra düşüyor. “Sertifika doğrulanamadı” hatası alıyor.</text>
+    <text x="88" y="540" class="body">Cihaz: FIN-LT-042 · Windows 11</text>
+    <text x="88" y="564" class="body">Hata kodu: </text>
+    <text x="180" y="564" font-family="Consolas, 'Courier New', monospace" font-size="14" fill="#9f2f3d">CERT_E_UNTRUSTEDROOT</text>
+    <text x="88" y="612" class="body">Denenenler: Bilgisayar ve VPN programı yeniden başlatıldı.</text>
+    <text x="88" y="660" class="body" font-weight="600">İş etkisi: Bugün 14:00 müşteri sunumu; 13:30'da</text>
+    <text x="88" y="684" class="body" font-weight="600">sunum dosyalarına erişim için VPN gerekli.</text>
+
+    <rect x="760" y="404" width="340" height="300" rx="14" fill="#fbfcfe" stroke="#e3e8ef"/>
+    <text x="780" y="436" font-size="16" font-weight="700" fill="#172131">Alanlar</text>
+    <text x="780" y="468" class="label">DURUM</text>
+    <rect x="780" y="476" width="64" height="22" rx="11" fill="#eef2ff"/>
+    <text x="812" y="491" text-anchor="middle" font-size="10" font-weight="800" fill="#3449cc">Açık</text>
+    <text x="780" y="516" class="label">ÖNCELİK</text>
+    <rect x="780" y="524" width="66" height="22" rx="11" fill="#fff1e6"/>
+    <text x="813" y="539" text-anchor="middle" font-size="10" font-weight="800" fill="#b45309">Yüksek</text>
+    <text x="780" y="564" class="label">KATEGORİ</text>
+    <text x="780" y="584" class="value">Ağ / VPN</text>
+    <text x="780" y="610" class="label">CİHAZ</text>
+    <text x="780" y="630" class="value">FIN-LT-042</text>
+    <text x="780" y="656" class="label">ETİKETLER</text>
+    <text x="780" y="676" class="value">vpn, sertifika</text>
+
+    <g>
+      <rect x="88" y="722" width="24" height="24" rx="7" fill="url(#accent)"/>
+      <path d="M96 738 L102 731 L108 738" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="124" y="738" font-size="12" font-weight="700" fill="#445be7">TickeTask tarafından oluşturuldu</text>
+      <text x="330" y="738" class="small">· 09:42</text>
+    </g>
+
+    <text x="56" y="804" class="small">Aynı akış Trello, GitHub Issues, Asana ve ClickUp için de çalışır.</text>
+    <text x="1144" y="804" text-anchor="end" class="small">Temsili görsel · Jira Cloud örneği</text>
+  </g>
+</svg>

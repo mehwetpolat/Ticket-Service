@@ -1,0 +1,39 @@
+import type { TicketDraft } from "../lib/ticket-types";
+
+export type Target="jira"|"trello"|"github"|"asana"|"clickup";
+export type SessionUser={id:string;name:string;email:string;role:"admin"|"member"};
+export type UserRecord=SessionUser&{status:"pending"|"active"|"disabled";createdAt:number;approvedAt:number|null;personId:string|null};
+export type MailSender={id:string|null;email:string;name:string;active:boolean;fromEnv:boolean};
+export type MailDomain={domain:string;fromEnv:boolean};
+export type Mailbox={id:string;label:string;host:string;port:number;secure:boolean;user:string;password:string;mailbox:string;hasPassword?:boolean};
+export type MailConfig={enabled:boolean;dryRun:boolean;pollSeconds:number;importExisting:boolean;maxPerPoll:number;mailboxes:Mailbox[]};
+export type MailboxPollStatus={state:"idle"|"connected"|"error";checkedAt:number;message:string;lastUid?:number};
+export type MailPollStatus={state:"idle"|"connected"|"error";checkedAt:number;message:string;mailboxes?:Record<string,MailboxPollStatus>};
+export type MailIngestion={id:string;mailbox:string;messageId:string;senderEmail:string;senderName:string;subject:string;status:"pending"|"processing"|"failed"|"published"|"dry_run"|"ignored";attempts:number;error:string|null;ticketId:string|null;createdAt:number;updatedAt:number;externalId:string|null;externalUrl:string|null;target:Target|null};
+export type SetupStepId="password"|"integration"|"destination"|"model"|"mail"|"senders"|"test"|"live";
+export type SetupStatus={
+  steps:Array<{id:SetupStepId;title:string;description:string;complete:boolean;detail:string;section:string}>;
+  complete:boolean;nextStep:SetupStepId|null;
+  counts:{dryRun:number;published:number;failed:number;ignored:number;ticketsPublished:number};
+  mail:{configured:boolean;enabled:boolean;dryRun:boolean;mailboxCount:number;status:MailPollStatus|null};
+  ticketSystem:{target:Target;label:string;shortLabel:string;destinationLabel:string;destinationHelp:string;docsUrl:string;apiDocsUrl:string;configured:boolean;tested:boolean;project:string;projectChecked:boolean};
+  llm:{connected:boolean;installed:boolean;model:string;endpoint:string};
+  senders:{addresses:number;domains:number};
+  appUrl:string;serverTime:number;
+};
+export type ProjectConfig={target:Target;destinationId:string;name:string};
+export type Person={id:string;name:string;email:string|null;department:string|null;phone:string|null;userId:string|null};
+export type Device={id:string;name:string;kind:"desktop"|"laptop"|"tablet"|"printer"|"network"|"server"|"other";ipAddress:string|null;serial:string|null;location:string|null;personId:string|null;personName:string|null;parentId:string|null;notes:string|null};
+export type Customer={id:string;name:string;email:string|null;phone:string|null;target:Target;destinationId:string};
+export type Message={id:string;customerId:string|null;customerName:string|null;personId:string|null;personName:string|null;deviceId:string|null;deviceName:string|null;createdBy:string|null;createdByName:string|null;channel:string;sender:string|null;subject:string|null;content:string;status:"new"|"analyzed"|"converted"|"ignored";receivedAt:number};
+export type TicketWorkflowStatus="open"|"inprogress"|"waiting"|"resolved"|"closed";
+export type Ticket={id:string;messageId:string|null;title:string;description:string;type:string;priority:"critical"|"high"|"normal";dueDate:string|null;labels:string[];subTasks:Array<{title:string;description:string;externalId?:string}>;target:Target;destinationId:string;externalId:string|null;externalUrl:string|null;status:"draft"|"published"|"failed";workflowStatus:TicketWorkflowStatus;assignedTo:string|null;assignedToName:string|null;resolvedAt:number|null;commentCount:number;error:string|null;createdAt:number;customerName:string|null;personId:string|null;personName:string|null;deviceId:string|null;deviceName:string|null;createdBy:string|null;createdByName:string|null};
+export type TicketComment={id:string;ticketId:string;authorId:string|null;authorName:string|null;body:string;createdAt:number};
+export type Config={localModel:boolean;jira:boolean;trello:boolean;github:boolean;asana:boolean;clickup:boolean;inboundWebhook:boolean;whatsapp:boolean;localMode:boolean};
+export type ModelStorageSlot="primary"|"secondary"|"custom";
+export type ModelStorage={
+  roots:{primary:string;secondary:string;custom:string;primaryHost:string;secondaryHost:string};
+  selection:{slot:ModelStorageSlot;folder:string;label:string;path:string};
+  job:{state:"idle"|"running"|"done"|"error"|"cancelled";model:string;progress:number;attempt:number;message:string};
+};
+export type Analysis={ticket:TicketDraft;mode:"ai"|"local"};

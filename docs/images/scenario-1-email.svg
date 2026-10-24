@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Örnek senaryo 1: Çalışan IT destek e-postası gönderir</title>
+  <desc id="desc">Ayşe Yılmaz, VPN'e bağlanamadığını, cihaz adını, ekranda gördüğü hata kodunu, denediği basit adımları ve iş etkisini sade bir dille IT Destek'e yazar.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7f9fd"/>
+      <stop offset="1" stop-color="#edf2fa"/>
+    </linearGradient>
+    <linearGradient id="avatar" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6f8cff"/>
+      <stop offset="1" stop-color="#445be7"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#172131" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      .font { font-family: 'Segoe UI', Arial, Helvetica, sans-serif; }
+      .eyebrow { font-size: 14px; font-weight: 700; letter-spacing: 2px; fill: #69758a; }
+      .title { font-size: 34px; font-weight: 700; letter-spacing: -1px; fill: #172131; }
+      .subtitle { font-size: 18px; fill: #69758a; }
+      .window-title { font-size: 15px; font-weight: 700; fill: #33425a; }
+      .side-label { font-size: 11px; font-weight: 800; letter-spacing: 1.6px; fill: #8a96a9; }
+      .side-item { font-size: 15px; font-weight: 600; fill: #44516a; }
+      .sender { font-size: 18px; font-weight: 700; fill: #172131; }
+      .meta { font-size: 13px; fill: #7b879b; }
+      .subject { font-size: 25px; font-weight: 700; letter-spacing: -0.4px; fill: #172131; }
+      .body { font-size: 17px; fill: #33425a; }
+      .small { font-size: 12px; fill: #8a96a9; }
+      .code { font-family: Consolas, 'Courier New', monospace; font-size: 16px; fill: #9f2f3d; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <circle cx="1140" cy="80" r="210" fill="#445be7" opacity="0.055"/>
+  <path d="M0 760 C260 720 420 820 680 770 S1000 710 1200 770" fill="none" stroke="#445be7" stroke-opacity="0.05" stroke-width="2"/>
+
+  <g class="font">
+    <rect x="56" y="38" width="40" height="40" rx="11" fill="url(#avatar)"/>
+    <path d="M69 59 L76 49 L83 59" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M69 59 L76 69 L83 59" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+    <text x="108" y="64" font-size="22" font-weight="700" fill="#172131">TickeTask</text>
+    <text x="109" y="80" font-size="10" font-weight="700" letter-spacing="1.6" fill="#8a96a9">IT SERVİS MASASI</text>
+
+    <rect x="944" y="40" width="200" height="34" rx="17" fill="#ffffff" stroke="#dbe3ef"/>
+    <text x="966" y="62" class="eyebrow">ÖRNEK AKIŞ · 01 / 03</text>
+
+    <text x="56" y="140" class="title">Çalışan IT'ye e-posta gönderir</text>
+    <text x="56" y="170" class="subtitle">Talep, IT Destek kutusuna düşer. TickeTask arka planda kutuyu izlemeye devam eder.</text>
+
+    <g filter="url(#shadow)">
+      <rect x="56" y="200" width="1088" height="660" rx="18" fill="#ffffff"/>
+    </g>
+
+    <rect x="56" y="200" width="1088" height="52" rx="18" fill="#f8fafc"/>
+    <rect x="56" y="234" width="1088" height="18" fill="#f8fafc"/>
+    <line x1="56" y1="252" x2="1144" y2="252" stroke="#e3e8ef"/>
+    <circle cx="82" cy="226" r="5" fill="#e8a3a8"/>
+    <circle cx="100" cy="226" r="5" fill="#eccb8b"/>
+    <circle cx="118" cy="226" r="5" fill="#a8d8c0"/>
+    <text x="146" y="231" class="window-title">Posta · Gelen Kutusu</text>
+    <text x="1090" y="231" text-anchor="end" class="meta">09:42</text>
+
+    <rect x="56" y="252" width="212" height="608" fill="#fbfcfe"/>
+    <line x1="268" y1="252" x2="268" y2="860" stroke="#e8edf5"/>
+
+    <text x="80" y="286" class="side-label">GELEN KUTUSU</text>
+    <rect x="70" y="302" width="184" height="38" rx="9" fill="#e8edff"/>
+    <path d="M86 315 L94 321 L102 315 M86 315 V330 H102 V315" fill="none" stroke="#445be7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="112" y="326" class="side-item" fill="#3449cc">Gelen Kutusu</text>
+    <rect x="216" y="311" width="24" height="20" rx="10" fill="#445be7"/>
+    <text x="228" y="325" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">3</text>
+
+    <path d="M87 367 L95 367 L99 363 L99 357 L95 353 L87 353 L83 357 L83 363 Z" fill="none" stroke="#69758a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="112" y="370" class="side-item">Yıldızlı</text>
+    <path d="M84 407 L103 407 M84 413 L99 413" stroke="#69758a" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M84 413 L103 413 L99 421 L97 421 L84 413 Z" fill="none" stroke="#69758a" stroke-width="1.8" stroke-linejoin="round"/>
+    <text x="112" y="412" class="side-item">Gönderilmiş</text>
+    <path d="M84 450 H103 M84 450 L84 458 H103 V450" fill="none" stroke="#69758a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="112" y="454" class="side-item">Arşiv</text>
+
+    <line x1="70" y1="484" x2="254" y2="484" stroke="#e8edf5"/>
+    <text x="80" y="512" class="side-label">ETİKETLER</text>
+    <circle cx="85" cy="538" r="4" fill="#445be7"/>
+    <text x="98" y="543" class="side-item">IT Destek</text>
+    <circle cx="85" cy="566" r="4" fill="#8a96a9"/>
+    <text x="98" y="571" class="side-item">Finans</text>
+
+    <rect x="72" y="680" width="180" height="78" rx="12" fill="#f0fbf7" stroke="#d3efe4"/>
+    <circle cx="90" cy="704" r="4" fill="#16845d"/>
+    <text x="102" y="708" font-size="12" font-weight="700" fill="#16845d">TickeTask izliyor</text>
+    <text x="90" y="730" font-size="11" fill="#5b7c70">Kutu arka planda</text>
+    <text x="90" y="746" font-size="11" fill="#5b7c70">kontrol edilir.</text>
+
+    <rect x="72" y="792" width="180" height="38" rx="9" fill="#445be7"/>
+    <path d="M90 811 H104 M97 804 V818" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
+    <text x="112" y="816" font-size="14" font-weight="700" fill="#ffffff">Yeni e-posta</text>
+
+    <circle cx="310" cy="286" r="22" fill="url(#avatar)"/>
+    <text x="310" y="291" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">AY</text>
+    <text x="344" y="284" class="sender">Ayşe Yılmaz</text>
+    <text x="344" y="306" class="meta">ayse.yilmaz@sirket.com</text>
+    <text x="1090" y="284" text-anchor="end" class="meta">09:42</text>
+
+    <rect x="310" y="332" width="62" height="22" rx="11" fill="#e9f8f2"/>
+    <text x="341" y="347" text-anchor="middle" font-size="11" font-weight="700" fill="#16845d">YENİ</text>
+    <text x="310" y="378" class="subject">VPN'e bağlanamıyorum</text>
+    <text x="310" y="404" class="meta">Kime: IT Destek &lt;destek@sirket.com&gt;</text>
+    <line x1="310" y1="424" x2="1100" y2="424" stroke="#e8edf5"/>
+
+    <text x="310" y="458" class="body">Merhaba IT Destek,</text>
+
+    <text x="310" y="494" class="body">Dün akşamdan beri şirket VPN'ine bağlanamıyorum. Bağlantı kuruluyor gibi</text>
+    <text x="310" y="520" class="body">oluyor ama birkaç saniye sonra düşüyor. Evdeki internetimde sorun yok;</text>
+    <text x="310" y="546" class="body">telefondan internete girebiliyorum.</text>
+
+    <text x="310" y="584" class="body">Dün akşam bilgisayarıma bir güncelleme geldi, sanırım ondan sonra</text>
+    <text x="310" y="610" class="body">başladı. Bilgisayarı kapatıp açtım, VPN programını da kapatıp açtım ama</text>
+    <text x="310" y="636" class="body">düzelmedi. Ekranda “Sertifika doğrulanamadı” yazıyor; altında da</text>
+    <text x="310" y="662" class="body"><tspan font-family="Consolas, 'Courier New', monospace" fill="#9f2f3d">CERT_E_UNTRUSTEDROOT</tspan> kodu var. Ne anlama geldiğini bilmiyorum,</text>
+    <text x="310" y="688" class="body">belki işinize yarar.</text>
+
+    <text x="310" y="726" class="body">Bugün 14:00'te müşteri sunumum var. 13:30'da sunum dosyalarına erişmem</text>
+    <text x="310" y="752" class="body">gerekiyor; bu yüzden benim için önemli.</text>
+    <text x="310" y="778" class="body">Yardımcı olabilirseniz çok sevinirim.</text>
+
+    <text x="310" y="816" class="body">Teşekkürler,</text>
+    <text x="310" y="843" class="body" font-weight="700">Ayşe Yılmaz · Finans / İstanbul</text>
+
+    <rect x="918" y="788" width="182" height="36" rx="9" fill="#eef2ff"/>
+    <path d="M935 801 L945 807 L955 801 M935 801 V813 H955 V801" fill="none" stroke="#445be7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="967" y="811" font-size="13" font-weight="700" fill="#3449cc">IT Destek'e iletildi</text>
+
+    <text x="56" y="884" class="small">Temsili görsel · Örnek gönderen, cihaz ve ticket verileri</text>
+    <text x="1144" y="884" text-anchor="end" class="small">Sonraki adım: arka plan işleme</text>
+  </g>
+</svg>

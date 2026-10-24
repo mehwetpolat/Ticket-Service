@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="820" viewBox="0 0 1200 820" role="img" aria-labelledby="title desc">
+  <title id="title">Örnek senaryo 2: TickeTask e-postayı arka planda işler</title>
+  <desc id="desc">TickeTask e-postayı alır, izinli gönderen ve otomatik yanıt filtrelerinden geçirir, yerel modelle analiz eder, cihaz ve iş etkisini çıkarır ve Jira ticket taslağını oluşturur.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7f9fd"/>
+      <stop offset="1" stop-color="#edf2fa"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6f8cff"/>
+      <stop offset="1" stop-color="#445be7"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#172131" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      .font { font-family: 'Segoe UI', Arial, Helvetica, sans-serif; }
+      .eyebrow { font-size: 14px; font-weight: 700; letter-spacing: 2px; fill: #69758a; }
+      .title { font-size: 34px; font-weight: 700; letter-spacing: -1px; fill: #172131; }
+      .subtitle { font-size: 18px; fill: #69758a; }
+      .window-title { font-size: 15px; font-weight: 700; fill: #33425a; }
+      .card-title { font-size: 17px; font-weight: 700; fill: #172131; }
+      .row { font-size: 15px; font-weight: 600; fill: #33425a; }
+      .time { font-size: 12px; fill: #8a96a9; }
+      .label { font-size: 11px; font-weight: 700; letter-spacing: 0.7px; fill: #8a96a9; }
+      .value { font-size: 15px; font-weight: 600; fill: #33425a; }
+      .small { font-size: 12px; fill: #8a96a9; }
+      .flow { font-size: 13px; font-weight: 700; fill: #44516a; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="820" fill="url(#bg)"/>
+  <circle cx="1140" cy="80" r="210" fill="#445be7" opacity="0.055"/>
+  <path d="M0 700 C260 660 420 760 680 710 S1000 650 1200 710" fill="none" stroke="#445be7" stroke-opacity="0.05" stroke-width="2"/>
+
+  <g class="font">
+    <rect x="56" y="38" width="40" height="40" rx="11" fill="url(#accent)"/>
+    <path d="M69 59 L76 49 L83 59" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M69 59 L76 69 L83 59" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+    <text x="108" y="64" font-size="22" font-weight="700" fill="#172131">TickeTask</text>
+    <text x="109" y="80" font-size="10" font-weight="700" letter-spacing="1.6" fill="#8a96a9">IT SERVİS MASASI</text>
+
+    <rect x="944" y="40" width="200" height="34" rx="17" fill="#ffffff" stroke="#dbe3ef"/>
+    <text x="966" y="62" class="eyebrow">ÖRNEK AKIŞ · 02 / 03</text>
+
+    <text x="56" y="140" class="title">TickeTask talebi arka planda işler</text>
+    <text x="56" y="170" class="subtitle">TickeTask kutuyu kontrol eder; filtre ve yerel model talebi yapılandırılmış bir ticket taslağına dönüştürür.</text>
+
+    <g filter="url(#shadow)">
+      <rect x="56" y="200" width="1088" height="540" rx="18" fill="#ffffff"/>
+    </g>
+
+    <rect x="56" y="200" width="1088" height="52" rx="18" fill="#f8fafc"/>
+    <rect x="56" y="234" width="1088" height="18" fill="#f8fafc"/>
+    <line x1="56" y1="252" x2="1144" y2="252" stroke="#e3e8ef"/>
+    <circle cx="82" cy="226" r="5" fill="#e8a3a8"/>
+    <circle cx="100" cy="226" r="5" fill="#eccb8b"/>
+    <circle cx="118" cy="226" r="5" fill="#a8d8c0"/>
+    <text x="146" y="231" class="window-title">Mail işlem geçmişi</text>
+    <rect x="1040" y="214" width="76" height="26" rx="13" fill="#e9f8f2"/>
+    <circle cx="1055" cy="227" r="4" fill="#16845d"/>
+    <text x="1066" y="232" font-size="12" font-weight="700" fill="#16845d">Canlı</text>
+
+    <line x1="150" y1="294" x2="915" y2="294" stroke="#dbe3ef" stroke-width="2"/>
+    <g>
+      <circle cx="150" cy="294" r="19" fill="#eef2ff" stroke="#c9d4ff"/>
+      <path d="M142 287 L150 293 L158 287 M142 287 V301 H158 V287" fill="none" stroke="#445be7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="150" y="332" text-anchor="middle" class="flow">IMAP</text>
+    </g>
+    <g>
+      <circle cx="405" cy="294" r="19" fill="#eef2ff" stroke="#c9d4ff"/>
+      <path d="M396 288 H414 L407 296 V302 H403 V296 Z" fill="none" stroke="#445be7" stroke-width="2" stroke-linejoin="round"/>
+      <text x="405" y="332" text-anchor="middle" class="flow">Ön filtre</text>
+    </g>
+    <g>
+      <circle cx="660" cy="294" r="19" fill="#eef2ff" stroke="#c9d4ff"/>
+      <path d="M652 302 L655 289 L660 297 L665 286 L668 302" fill="none" stroke="#445be7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="660" y="332" text-anchor="middle" class="flow">Yerel model</text>
+    </g>
+    <g>
+      <circle cx="915" cy="294" r="19" fill="#e9f8f2" stroke="#bfe8d8"/>
+      <path d="M906 294 L912 300 L925 286" fill="none" stroke="#16845d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="915" y="332" text-anchor="middle" class="flow">Ticket</text>
+    </g>
+
+    <rect x="80" y="352" width="520" height="350" rx="14" fill="#fbfcfe" stroke="#e3e8ef"/>
+    <text x="100" y="384" class="card-title">İşlem adımları</text>
+    <line x1="104" y1="420" x2="104" y2="650" stroke="#dbe3ef" stroke-width="2"/>
+    <g>
+      <circle cx="104" cy="420" r="9" fill="#e9f8f2" stroke="#bfe8d8"/>
+      <path d="M100 420 L103 423 L109 416" fill="none" stroke="#16845d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="126" y="426" class="row">Yeni e-posta alındı</text>
+      <text x="570" y="426" text-anchor="end" class="time">09:42:15</text>
+
+      <circle cx="104" cy="466" r="9" fill="#e9f8f2" stroke="#bfe8d8"/>
+      <path d="M100 466 L103 469 L109 462" fill="none" stroke="#16845d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="126" y="472" class="row">Gönderen izinli · sirket.com</text>
+      <text x="570" y="472" text-anchor="end" class="time">09:42:16</text>
+
+      <circle cx="104" cy="512" r="9" fill="#e9f8f2" stroke="#bfe8d8"/>
+      <path d="M100 512 L103 515 L109 508" fill="none" stroke="#16845d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="126" y="518" class="row">Otomatik yanıt değil</text>
+      <text x="570" y="518" text-anchor="end" class="time">09:42:16</text>
+
+      <circle cx="104" cy="558" r="9" fill="#e9f8f2" stroke="#bfe8d8"/>
+      <path d="M100 558 L103 561 L109 554" fill="none" stroke="#16845d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="126" y="564" class="row">Yerel model analizi tamamlandı</text>
+      <text x="570" y="564" text-anchor="end" class="time">09:42:18</text>
+
+      <circle cx="104" cy="604" r="9" fill="#e9f8f2" stroke="#bfe8d8"/>
+      <path d="M100 604 L103 607 L109 600" fill="none" stroke="#16845d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="126" y="610" class="row">Cihaz ve iş etkisi çıkarıldı</text>
+      <text x="570" y="610" text-anchor="end" class="time">09:42:18</text>
+
+      <circle cx="104" cy="650" r="9" fill="#e8edff" stroke="#c9d4ff"/>
+      <path d="M100 650 L103 653 L109 646" fill="none" stroke="#445be7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="126" y="656" class="row" fill="#3449cc">Jira'da IT-142 oluşturuldu</text>
+      <text x="570" y="656" text-anchor="end" class="time">09:42:19</text>
+    </g>
+
+    <rect x="620" y="352" width="492" height="350" rx="14" fill="#fbfcfe" stroke="#e3e8ef"/>
+    <text x="640" y="384" class="card-title">Analiz sonucu</text>
+    <text x="640" y="418" class="label">BAŞLIK</text>
+    <text x="640" y="438" class="value">VPN bağlantısı açılmıyor</text>
+    <text x="640" y="468" class="label">KATEGORİ</text>
+    <text x="640" y="488" class="value">Ağ / VPN</text>
+    <text x="640" y="518" class="label">ÖNCELİK</text>
+    <rect x="640" y="526" width="66" height="22" rx="11" fill="#fff1e6"/>
+    <text x="673" y="541" text-anchor="middle" font-size="11" font-weight="700" fill="#b45309">Yüksek</text>
+    <text x="640" y="566" class="label">TALEP EDEN</text>
+    <text x="640" y="586" class="value">Ayşe Yılmaz</text>
+    <text x="640" y="616" class="label">CİHAZ</text>
+    <text x="640" y="636" class="value">FIN-LT-042</text>
+    <text x="640" y="666" class="label">HEDEF</text>
+    <rect x="640" y="674" width="74" height="22" rx="11" fill="#eef2ff"/>
+    <text x="677" y="689" text-anchor="middle" font-size="11" font-weight="700" fill="#3449cc">Jira · IT</text>
+
+    <g>
+      <path d="M80 722 L84 712 H100 L104 722 V728 H80 Z" fill="none" stroke="#16845d" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M86 717 H98" stroke="#16845d" stroke-width="1.8" stroke-linecap="round"/>
+      <text x="114" y="726" font-size="13" font-weight="600" fill="#4b5a70">Yerel model çağrısı kurum ağında kaldı.</text>
+      <text x="1112" y="726" text-anchor="end" font-size="12" font-weight="700" fill="#16845d">Ollama · yerel</text>
+    </g>
+
+    <text x="56" y="784" class="small">Temsili görsel · Örnek işlem zaman çizelgesi</text>
+    <text x="1144" y="784" text-anchor="end" class="small">Sonraki adım: ticket sistemi</text>
+  </g>
+</svg>

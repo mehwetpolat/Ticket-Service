@@ -1,0 +1,33 @@
+## .NET build output
+**/bin/
+**/obj/
+**/TestResults/
+artifacts/
+*.trx
+*.coverage
+*.user
+*.suo
+.vs/
+.idea/
+
+## Runtime data and secrets
+data/
+.ticketask-runtime/
+src/TickeTask.Web/data/
+src/TickeTask.Web/.ticketask-runtime/
+*.db
+*.db-shm
+*.db-wal
+
+## Frontend
+frontend/node_modules/
+frontend/src/styles/app.css
+
+## Local configuration
+.env
+.env.*
+!.env.example
+
+## OS files
+.DS_Store
+Thumbs.db

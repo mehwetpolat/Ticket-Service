@@ -1,0 +1,75 @@
+name: ticketask
+
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    environment:
+      ASPNETCORE_URLS: http://0.0.0.0:8787
+      OLLAMA_URL: http://ollama:11434
+      MODEL_CONFIG_DIR: /ollama-home
+      MODEL_PRIMARY_DIR: /model-roots/primary
+      MODEL_SECONDARY_DIR: /model-roots/secondary
+      MODEL_PRIMARY_HOST_PATH: ${TICKETASK_MODEL_PRIMARY_HOST_PATH:-}
+      MODEL_SECONDARY_HOST_PATH: ${TICKETASK_MODEL_SECONDARY_HOST_PATH:-}
+      MODEL_PRIMARY_LABEL: ${TICKETASK_MODEL_PRIMARY_LABEL:-Birinci konum}
+      MODEL_SECONDARY_LABEL: ${TICKETASK_MODEL_SECONDARY_LABEL:-İkinci konum}
+      APP_PUBLIC_ORIGIN: ${APP_PUBLIC_ORIGIN:-}
+      TRUST_PROXY: ${TRUST_PROXY:-0}
+      ALLOW_SELF_REGISTRATION: ${ALLOW_SELF_REGISTRATION:-1}
+      ALLOWED_SENDERS: ${ALLOWED_SENDERS:-}
+      ALLOWED_DOMAINS: ${ALLOWED_DOMAINS:-}
+      JIRA_BASE_URL: ${JIRA_BASE_URL:-}
+      JIRA_EMAIL: ${JIRA_EMAIL:-}
+      JIRA_API_TOKEN: ${JIRA_API_TOKEN:-}
+      TRELLO_API_KEY: ${TRELLO_API_KEY:-}
+      TRELLO_TOKEN: ${TRELLO_TOKEN:-}
+      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
+      GITHUB_API_URL: ${GITHUB_API_URL:-}
+      ASANA_TOKEN: ${ASANA_TOKEN:-}
+      CLICKUP_TOKEN: ${CLICKUP_TOKEN:-}
+      INBOUND_WEBHOOK_TOKEN: ${INBOUND_WEBHOOK_TOKEN:-}
+      WHATSAPP_VERIFY_TOKEN: ${WHATSAPP_VERIFY_TOKEN:-}
+      WHATSAPP_APP_SECRET: ${WHATSAPP_APP_SECRET:-}
+      WEBHOOK_OWNER_ID: ${WEBHOOK_OWNER_ID:-local-user}
+    ports:
+      - "${TICKETASK_BIND_ADDRESS:-127.0.0.1}:${TICKETASK_PORT:-8787}:8787"
+    volumes:
+      - ${TICKETASK_DATA_ROOT:-./data}/app:/app/data
+      - ${TICKETASK_DATA_ROOT:-./data}/secrets:/app/.ticketask-runtime
+      - ollama-home:/ollama-home
+      - ${TICKETASK_MODEL_PRIMARY_ROOT:-./data/ollama}:/model-roots/primary
+      - ${TICKETASK_MODEL_SECONDARY_ROOT:-./data/ollama-alternative}:/model-roots/secondary
+    depends_on:
+      ollama:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8787/api/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  ollama:
+    image: ollama/ollama:latest
+    restart: unless-stopped
+    environment:
+      OLLAMA_NO_CLOUD: "1"
+    # Repair the shared model link before Ollama validates OLLAMA_MODELS.
+    # A previous run can leave /root/.ollama/models pointing at a bind mount
+    # that is currently empty, which makes Ollama fail with "file exists".
+    entrypoint: ["/bin/sh", "/usr/local/bin/ticketask-ollama-start"]
+    volumes:
+      - ollama-home:/root/.ollama
+      - ${TICKETASK_MODEL_PRIMARY_ROOT:-./data/ollama}:/model-roots/primary
+      - ${TICKETASK_MODEL_SECONDARY_ROOT:-./data/ollama-alternative}:/model-roots/secondary
+      - ./scripts/ollama-start.sh:/usr/local/bin/ticketask-ollama-start:ro
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 15s
+
+volumes:
+  ollama-home:

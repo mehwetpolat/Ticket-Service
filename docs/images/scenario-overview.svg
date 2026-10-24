@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="540" viewBox="0 0 1600 540" role="img" aria-labelledby="title desc">
+  <title id="title">TickeTask örnek akışı: e-posta, yerel analiz ve ticket</title>
+  <desc id="desc">Bir çalışanın iki cümlelik IT destek e-postası TickeTask tarafından yerel modelle analiz edilir ve Jira, Trello, GitHub Issues, Asana veya ClickUp üzerinde ticket açılır.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#111b2f"/>
+      <stop offset="0.55" stop-color="#182942"/>
+      <stop offset="1" stop-color="#243a5e"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6f8cff"/>
+      <stop offset="1" stop-color="#445be7"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#07101f" flood-opacity="0.35"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#7890b8"/>
+    </marker>
+    <style>
+      .font { font-family: 'Segoe UI', Arial, Helvetica, sans-serif; }
+      .eyebrow { font-size: 15px; font-weight: 700; letter-spacing: 2.2px; fill: #9fb1ce; }
+      .title { font-size: 42px; font-weight: 700; letter-spacing: -1.4px; fill: #ffffff; }
+      .subtitle { font-size: 20px; fill: #b9c7dc; }
+      .step { font-size: 14px; font-weight: 800; letter-spacing: 1.5px; fill: #6479a3; }
+      .card-title { font-size: 24px; font-weight: 700; fill: #172131; }
+      .card-text { font-size: 18px; font-weight: 600; fill: #33425a; }
+      .card-snippet { font-size: 16px; fill: #4b5a70; }
+      .card-meta { font-size: 15px; fill: #69758a; }
+      .chip { font-size: 13px; font-weight: 700; fill: #445be7; }
+      .small { font-size: 13px; fill: #8fa2c0; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="540" fill="url(#bg)"/>
+  <circle cx="1460" cy="30" r="230" fill="#445be7" opacity="0.12"/>
+  <circle cx="130" cy="500" r="190" fill="#26c28b" opacity="0.08"/>
+  <path d="M0 400 C260 330 400 450 640 395 S1040 310 1600 390" fill="none" stroke="#6f8cff" stroke-opacity="0.08" stroke-width="2"/>
+
+  <g class="font">
+    <rect x="64" y="42" width="42" height="42" rx="12" fill="url(#accent)"/>
+    <path d="M77 64 L85 53 L93 64" fill="none" stroke="#ffffff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M77 64 L85 75 L93 64" fill="none" stroke="#ffffff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+    <text x="120" y="70" font-size="24" font-weight="700" fill="#ffffff">TickeTask</text>
+    <text x="121" y="87" font-size="11" font-weight="700" letter-spacing="1.8" fill="#8fa2c0">IT SERVİS MASASI</text>
+
+    <rect x="1300" y="44" width="236" height="34" rx="17" fill="#ffffff" fill-opacity="0.08" stroke="#ffffff" stroke-opacity="0.16"/>
+    <text x="1323" y="66" class="eyebrow">ÖRNEK AKIŞ · 3 ADIM</text>
+
+    <text x="64" y="158" class="title">Bir e-posta, dakikalar içinde ticket.</text>
+    <text x="64" y="192" class="subtitle">IT Destek kutusunu izleyen TickeTask talebi yerel modelle analiz eder ve seçili ticket sisteminde kayıt açar.</text>
+
+    <g filter="url(#shadow)">
+      <rect x="64" y="238" width="430" height="250" rx="22" fill="#f8fafc"/>
+      <rect x="551" y="238" width="430" height="250" rx="22" fill="#f8fafc"/>
+      <rect x="1038" y="238" width="430" height="250" rx="22" fill="#f8fafc"/>
+    </g>
+
+    <path d="M494 363 L545 363" stroke="#7890b8" stroke-width="2" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+    <path d="M981 363 L1032 363" stroke="#7890b8" stroke-width="2" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+
+    <g>
+      <rect x="92" y="258" width="44" height="44" rx="13" fill="#e8edff"/>
+      <path d="M105 273 L114 280 L123 273 M105 273 V289 H123 V273" fill="none" stroke="#445be7" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="152" y="278" class="step">01 · GELEN E-POSTA</text>
+      <text x="92" y="338" class="card-title">Talep geldi</text>
+      <text x="92" y="368" class="card-text">VPN'e bağlanamıyorum</text>
+      <text x="92" y="394" class="card-snippet">Dün akşamdan beri bağlantı kuramıyorum.</text>
+      <text x="92" y="415" class="card-snippet">14:00'te sunumum var, yardımcı olur musunuz?</text>
+      <text x="92" y="441" class="card-meta">Ayşe Yılmaz · Finans</text>
+      <rect x="92" y="453" width="164" height="22" rx="11" fill="#eef2ff"/>
+      <text x="104" y="468" class="chip">destek@sirket.com</text>
+    </g>
+
+    <g>
+      <rect x="579" y="258" width="44" height="44" rx="13" fill="#e8edff"/>
+      <path d="M592 284 L596 271 L602 280 L608 267 L612 284" fill="none" stroke="#445be7" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="601" cy="290" r="5" fill="none" stroke="#445be7" stroke-width="2.2"/>
+      <text x="639" y="278" class="step">02 · YEREL ANALİZ</text>
+      <text x="579" y="338" class="card-title">TickeTask işledi</text>
+      <text x="579" y="368" class="card-text">Ön filtre + yerel model</text>
+      <text x="579" y="394" class="card-meta">Ağ / VPN · Yüksek öncelik</text>
+      <text x="579" y="415" class="card-meta">Cihaz: FIN-LT-042</text>
+      <rect x="579" y="453" width="150" height="22" rx="11" fill="#e9f8f2"/>
+      <text x="591" y="468" font-size="13" font-weight="700" fill="#16845d">Ollama · yerel</text>
+    </g>
+
+    <g>
+      <rect x="1066" y="258" width="44" height="44" rx="13" fill="#e9f8f2"/>
+      <path d="M1078 280 L1084 286 L1098 272" fill="none" stroke="#16845d" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="1126" y="278" class="step">03 · TICKET SİSTEMİ</text>
+      <text x="1066" y="338" class="card-title">Ticket açıldı</text>
+      <text x="1066" y="368" class="card-text">IT-142 · VPN bağlantısı açılmıyor</text>
+      <text x="1066" y="394" class="card-meta">Jira Cloud · IT projesi</text>
+      <text x="1066" y="415" class="card-meta">Öncelik: Yüksek</text>
+      <rect x="1066" y="453" width="280" height="22" rx="11" fill="#eef2ff"/>
+      <text x="1078" y="468" class="chip">Trello · GitHub · Asana · ClickUp</text>
+    </g>
+
+    <text x="64" y="514" class="small">Temsili akış · Örnek veriler kullanılmıştır</text>
+    <text x="1536" y="514" text-anchor="end" class="small">Self-hosted · Yerel model · Kurum ağında</text>
+  </g>
+</svg>
